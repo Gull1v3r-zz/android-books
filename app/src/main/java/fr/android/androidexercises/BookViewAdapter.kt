@@ -4,6 +4,7 @@ import android.app.Activity
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import com.squareup.picasso.Picasso
@@ -21,6 +22,17 @@ class BookViewAdapter(private val context:Activity, private val titles: List<Str
 
         titleText.text = titles[position]
         println(imagesURL[position])
+
+        //OnClick on btn R.id.cartButton
+        val button = rowView.findViewById(R.id.cartButton) as Button;
+        button.setOnClickListener {
+            val bName = titles[position];
+            val bImage = imagesURL[position];
+            //INCREMENTER LE NB LIVRE DANS LE PANIER + ENVOYER CA A LIBRARY ACTIVITY
+        // data.add(arrayOf(bName, bImage));
+        }
+
+
         Picasso.get().load(imagesURL[position]).into(imageView)
 
         return rowView

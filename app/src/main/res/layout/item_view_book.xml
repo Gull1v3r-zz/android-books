@@ -5,6 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
+    android:numColumns="2"
+    android:verticalSpacing="5dp"
     android:stretchColumns="1">
 
     <ImageView
@@ -23,5 +25,11 @@
         android:layout_gravity="center"
         android:layout_weight="0.7"
         tools:text="Henri Potier à l'école des sorciers"/>
+
+    <Button
+        android:id="@+id/cartButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add to cart" />
 
 </TableLayout>
