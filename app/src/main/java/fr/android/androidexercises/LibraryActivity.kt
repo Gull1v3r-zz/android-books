@@ -54,23 +54,20 @@ class LibraryActivity : AppCompatActivity() {
         service.getListBooks().enqueue(object : Callback<List<Book>> {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 val books = response.body()!!
-                val arrayAdapter = BookViewAdapter(libraryActivity, books.map { b -> b.title }, books.map { b -> b.cover }, books.map {b -> b.synopsis})
+                val arrayAdapter = BookViewAdapter(libraryActivity, books)
                 l.adapter = arrayAdapter
                 l.isClickable = true
-
-                //On btn click plutot que on item click
-                l.setOnItemClickListener { parent, view, position, id ->
-
-                }
             }
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
         })
 
-        //TODO Afficher sur le FRONT
-
-        displayBooks(l, this)
+        val button = findViewById(R.id.seeCartButton) as Button
+        button.setOnClickListener {
+            val intent = Intent(this,  CartActivity::class.java)
+            startActivity(intent)
+        }
 
 
         //Quand click sur le livre, afficher le synopsis du livre

@@ -2,30 +2,16 @@ package fr.android.androidexercises
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.DialogInterface
-import android.opengl.Visibility
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TableRow
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
 
-class BookViewAdapter(private val context:Activity,
-                      private val books: List<Book>)
-    : ArrayAdapter<Book> (context, R.layout.item_view_book, books){
+class CartBookViewAdapter(private val context: Activity,
+                          private val books: List<Book>)
+    : ArrayAdapter<Book>(context, R.layout.item_view_book, books) {
 
-    fun updateCartCount(button: Button, position: Int) {
-        val nbOfElInCart = CartContent.cart.count { b -> b == books[position] }
-        if(nbOfElInCart > 0) {
-            button.text = nbOfElInCart.toString()
-        } else
-        {
-            button.text = ""
-        }
-    }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
 
@@ -43,20 +29,21 @@ class BookViewAdapter(private val context:Activity,
 
         //OnClick on btn R.id.cartButton
         val button = rowView.findViewById(R.id.cartButton) as Button;
+        button.background = ContextCompat.getDrawable(context, R.drawable.cross)
 
-        updateCartCount(button, position)
 
         button.setOnClickListener {
-            CartContent.cart += books[position]
             AlertDialog.Builder(context)
-                .setTitle("Added to cart successfully !")
-                .setPositiveButton("OK !", null)
-                .setNegativeButton("Cancel") { dialog, which ->
-                    CartContent.cart.removeLast()
-                    updateCartCount(button, position)
+                .setTitle("Do you want to remove one item from cart ?")
+                .setPositiveButton("Yes !") { dialog, which ->
+                    CartContent.cart.remove(books[position])
+                    if (CartContent.cart.count { b -> b == books[position] } == 0)
+                    {
+                        rowView.visibility = View.GONE
+                    }
                 }
+                .setNegativeButton("Cancel", null)
                 .show()
-            updateCartCount(button,position)
         }
 
         val row = rowView.findViewById(R.id.tableRowView) as TableRow

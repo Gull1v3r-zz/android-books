@@ -1,9 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView
+
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/bookListView"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".LibraryActivity"/>
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="La libraierigolote"
+            android:gravity="center"
+            android:padding="15dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="See Cart"
+            android:layout_alignParentRight="true"
+            android:id="@+id/seeCartButton"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/bookListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".LibraryActivity"/>
+</LinearLayout>
