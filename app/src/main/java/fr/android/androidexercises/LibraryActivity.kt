@@ -14,6 +14,7 @@ class LibraryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_library)
+        var books : MutableList<Book> = ArrayList();
 
         // Plant logger cf. Android Timber
         Timber.plant(Timber.DebugTree())
@@ -32,10 +33,7 @@ class LibraryActivity : AppCompatActivity() {
 
         service.getListBooks().enqueue(object : Callback<List<Book>> {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
-                for(book in response.body()?.toMutableList()!!)
-                {
-                    Timber.d(book.title)
-                }
+                books = response.body()?.toMutableList()!!
             }
 
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
@@ -45,6 +43,8 @@ class LibraryActivity : AppCompatActivity() {
 
         // TODO log books
         // TODO display book as a list
+
+        Timber.d(books.toString())
     }
 
 }
