@@ -67,8 +67,6 @@ class LibraryActivity : AppCompatActivity() {
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
                 TODO("Not yet implemented")
             }
-
-
         })
 
         //TODO Afficher sur le FRONT
@@ -88,20 +86,13 @@ class LibraryActivity : AppCompatActivity() {
             intent.putExtra("book", data)
             startActivity(intent)
         }
+        /* lire l'intent dans le cartActivity
+            String value = getIntent().getStringExtra("key");
+         */
 
 
         // TODO log books
         // TODO display book as a list
-
-
-        /*
-                            val intent = Intent(_this, CartActivity::class.java)
-                    intent.putExtra("book", data)
-                    startActivity(intent)
-
-
-         */
-
 
     }
 
