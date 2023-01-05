@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ListView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class CartActivity : AppCompatActivity() {
@@ -22,6 +23,8 @@ class CartActivity : AppCompatActivity() {
             val intent = Intent(this,  LibraryActivity::class.java)
             startActivity(intent)
         }
+
+        findViewById<TextView>(R.id.priceView).text = "Prix total : " + CartContent.cart.map { b -> b.price}.sum().toString() + "€"
 
 
     }

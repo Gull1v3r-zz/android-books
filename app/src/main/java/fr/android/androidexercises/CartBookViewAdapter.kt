@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
 class CartBookViewAdapter(private val context: Activity,
                           private val books: List<Book>)
@@ -23,7 +24,7 @@ class CartBookViewAdapter(private val context: Activity,
         val synopsisText = rowView.findViewById(R.id.synopsisView) as TextView
 
 
-        titleText.text = books[position].title
+        titleText.text = books[position].title + " \n " + books[position].price + "€"
         Picasso.get().load(books[position].cover).into(imageView)
         synopsisText.text = books[position].synopsis.joinToString();
 
@@ -40,6 +41,8 @@ class CartBookViewAdapter(private val context: Activity,
                     if (CartContent.cart.count { b -> b == books[position] } == 0)
                     {
                         rowView.visibility = View.GONE
+                        val activityCartView = parent.parent as LinearLayout
+                        activityCartView.findViewById<TextView>(R.id.priceView).text = "Prix total : " + CartContent.cart.map { b -> b.price}.sum().toString() + "€"
                     }
                 }
                 .setNegativeButton("Cancel", null)

@@ -37,7 +37,7 @@ class BookViewAdapter(private val context:Activity,
         val synopsisText = rowView.findViewById(R.id.synopsisView) as TextView
 
 
-        titleText.text = books[position].title
+        titleText.text = books[position].title + "\n" + books[position].price + "€"
         Picasso.get().load(books[position].cover).into(imageView)
         synopsisText.text = books[position].synopsis.joinToString();
 
