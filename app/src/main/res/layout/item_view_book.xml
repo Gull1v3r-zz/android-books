@@ -4,32 +4,51 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
+    android:layout_height="300dp"
     android:numColumns="2"
     android:verticalSpacing="5dp"
-    android:stretchColumns="1">
+    android:stretchColumns="1"
+    android:padding="15dp">
 
-    <ImageView
-        android:id="@+id/iconView"
+    <TableRow
+        android:id="@+id/tableRowView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:maxHeight="80dp"
-        android:maxWidth="30dp"
-        android:src="@drawable/ic_launcher"
-        tools:ignore="ContentDescription" />
+        android:layout_height="50dp"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/iconView"
+            android:layout_width="77dp"
+            android:layout_height="100dp"
+            android:clickable="false"
+            android:src="@drawable/ic_launcher"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:clickable="false"
+            android:gravity="center"
+            tools:text="Henri Potier à l'école des sorciers" />
+
+        <Button
+            android:id="@+id/cartButton"
+            android:layout_width="48dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:background="@drawable/cart" />
+    </TableRow>
 
     <TextView
-        android:id="@+id/titleTextView"
-        android:layout_width="0px"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0.7"
-        tools:text="Henri Potier à l'école des sorciers"/>
+        android:id="@+id/synopsisView"
+        android:visibility="gone"
+        android:layout_marginTop="15dp">
 
-    <Button
-        android:id="@+id/cartButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add to cart" />
+    </TextView>
+
 
 </TableLayout>

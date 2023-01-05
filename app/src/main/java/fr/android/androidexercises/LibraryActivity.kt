@@ -2,6 +2,7 @@ package fr.android.androidexercises
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -18,7 +19,7 @@ import timber.log.Timber
 class LibraryActivity : AppCompatActivity() {
 
     var _this = this
-    var data = ArrayList<Array<String>>();
+    var data = ArrayList<Book>();
 
     private fun displayBooks(view: ListView, libraryActivity: LibraryActivity){
 
@@ -53,15 +54,13 @@ class LibraryActivity : AppCompatActivity() {
         service.getListBooks().enqueue(object : Callback<List<Book>> {
             override fun onResponse(call: Call<List<Book>>, response: Response<List<Book>>) {
                 val books = response.body()!!
-                val arrayAdapter = BookViewAdapter(libraryActivity, books.map { b -> b.title }, books.map { b -> b.cover })
+                val arrayAdapter = BookViewAdapter(libraryActivity, books.map { b -> b.title }, books.map { b -> b.cover }, books.map {b -> b.synopsis})
                 l.adapter = arrayAdapter
+                l.isClickable = true
 
                 //On btn click plutot que on item click
                 l.setOnItemClickListener { parent, view, position, id ->
-                    //foreach book = récupérer le nom du livre et l'image
-                    val bName = books[position].title;
-                    val bImage = books[position].cover;
-                    data.add(arrayOf(bName, bImage));
+
                 }
             }
             override fun onFailure(call: Call<List<Book>>, t: Throwable) {
@@ -80,12 +79,14 @@ class LibraryActivity : AppCompatActivity() {
         //Quand click sur un livre, l'envoie dans le panier
 
         //Envoie des infos au panier
+        /*
         val button = findViewById<Button>(R.id.cartButton)
         button.setOnClickListener {
             val cartActivityIntent = Intent(_this, CartActivity::class.java)
             intent.putExtra("book", data)
             startActivity(intent)
         }
+        */
         /* lire l'intent dans le cartActivity
             String value = getIntent().getStringExtra("key");
          */
